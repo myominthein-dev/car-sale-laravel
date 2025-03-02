@@ -1,0 +1,27 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}    }        return $next($request);        }            return redirect()->route('home');        if (! $request->user() || ! $request->user()->hasRole($role)) {    {    public function handle(Request $request, Closure $next, string $role): Response     */     * @return mixed     * @param  string  $role     * @param  \Closure  $next     * @param  \Illuminate\Http\Request  $request     *     * Handle an incoming request.    /**{class CheckRoleuse Symfony\Component\HttpFoundation\Response;use Illuminate\Http\Request;use Closure;namespace App\Http\Middleware;<?php
