@@ -1,11 +1,10 @@
-<!-- resources/views/partials/header.blade.php -->
 <header x-data="{ mobileMenuOpen: false }" class="bg-gray-100 sticky top-0 z-50 shadow-md">
     <div class="container mx-auto px-4 py-1 flex justify-between items-center">
         <a href="/" class="flex items-center ">
             <img src="{{ asset('img/car_logo.jpg') }}" alt="Logo" class="h-16">
         </a>
 
-        {{-- gg --}}
+        {{-- Mobile Menu Toggle --}}
         <div class="flex items-center">
             <button id="toggleSidebarMobile" class="hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500">
                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -14,34 +13,53 @@
             </button>
         </div>
 
-        {{-- gg --}}
+        {{-- Mobile Menu Button --}}
         <button @click="mobileMenuOpen = !mobileMenuOpen" class="lg:hidden btn btn-default btn-navbar-toggle">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
         </button>
-        <div :class="{'hidden': !mobileMenuOpen}" class="lg:flex flex justify-center bg-white py-5 md:py-0  lg:items-center  space-x-4 absolute lg:relative top-full left-0 right-0  lg:bg-transparent shadow-md lg:shadow-none">
+
+        {{-- Navigation Menu --}}
+        <div :class="{'hidden': !mobileMenuOpen}" class="lg:flex flex justify-center bg-white py-5 md:py-0 lg:items-center space-x-4 absolute lg:relative top-full left-0 right-0 lg:bg-transparent shadow-md lg:shadow-none">
             <a href="{{ route('cars.create') }}" class="btn btn-primary flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
                 Add new Car
             </a>
+
             @auth
+                {{-- Messages Link --}}
+                <a href="{{ route('messages.index') }}" class="btn btn-secondary flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                    </svg>
+                    Messages
+                    @php
+                        $unreadCount = Auth::user()->unreadMessagesCount();
+                    @endphp
+                    @if($unreadCount > 0)
+                        <span class="ml-2 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
+                            {{ $unreadCount }}
+                        </span>
+                    @endif
+                </a>
 
-            @if (Auth::user()->role_id == 1)
-            <a href="{{ route('dashboard') }}" class="border-2  px-3 py-2">Dashboard</a>
-            @endif
+                @if (Auth::user()->role_id == 1)
+                    <a href="{{ route('dashboard') }}" class="border-2 px-3 py-2">Dashboard</a>
+                @endif
 
-                <div class="relative " x-data="{ open: false }">
-                    <button @click="open = !open" class="flex items-center h-full   space-x-1">
+                {{-- My Account Dropdown --}}
+                <div class="relative" x-data="{ open: false }">
+                    <button @click="open = !open" class="flex items-center h-full space-x-1">
                         <span>My Account</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                         </svg>
                     </button>
                     <ul x-show="open" @click.away="open = false" class="absolute right-0 mt-2 py-2 w-48 bg-white rounded-md shadow-xl z-20">
-                        <li><a href="{{ route('cars.index') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Cars</a></li>
+                        <li><a href="{{ route('cars.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Cars</a></li>
                         <li><a href="{{ route('cars.wishList') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Favourite Cars</a></li>
                         <li><a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Profile</a></li>
                         <li>
@@ -52,8 +70,6 @@
                         </li>
                     </ul>
                 </div>
-
-                
             @else
                 <a href="{{ route('register') }}" class="btn btn-primary flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 mr-2">
@@ -71,3 +87,4 @@
         </div>
     </div>
 </header>
+

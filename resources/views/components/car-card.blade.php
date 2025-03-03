@@ -39,7 +39,25 @@
                 Owner : <span class="font-semibold"> {{ $car->user->name }}</span>
             </div>
             <div>
-                <button class="bg-blue-500 rounded-lg px-2 py-2 text-white text-xs">Contact Owner</button>
+                @auth
+                @if(Auth::id() != $car->user_id)
+                    <button 
+                        onclick="window.location.href='{{ route('messages.create', ['car_id' => $car->id]) }}'"
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                    >
+                        Contact Owner
+                    </button>
+                @else
+                    <span class="text-gray-500 text-sm">Your Listing</span>
+                @endif
+            @else
+                <button 
+                    onclick="window.location.href='{{ route('login') }}'"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium"
+                >
+                    Login to Contact
+                </button>
+            @endauth
             </div>
         </div>
     </div>

@@ -10,6 +10,7 @@ use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\FuelTypeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MakerController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StateController;
 use App\Http\Middleware\MustBeAdmin;
@@ -100,5 +101,14 @@ if (Hash::check($plainPassword, $hashedPassword)) {
     echo "Password does not match.";
 }
 })->name('sth');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/create', [MessageController::class, 'create'])->name('messages.create');
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+    Route::get('/messages/{conversation}', [MessageController::class, 'show'])->name('messages.show');
+    Route::post('/messages/{conversation}/reply', [MessageController::class, 'reply'])->name('messages.reply');
+});
+
 
 require __DIR__.'/auth.php';

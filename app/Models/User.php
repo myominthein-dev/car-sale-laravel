@@ -73,6 +73,34 @@ class User extends Authenticatable
         return $this->role_id === 1;
     }
 
+    public function sentConversations(): HasMany
+    {
+        return $this->hasMany(Conversation::class, 'sender_id');
+    }
+
+    public function receivedConversations(): HasMany
+    {
+        return $this->hasMany(Conversation::class, 'receiver_id');
+    }
+
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function unreadMessagesCount()
+    {
+        $userId = $this->id;
+        
+        return Message::whereHas('conversation', function ($query) use ($userId) {
+            $query->where('sender_id', $userId)
+                  ->orWhere('receiver_id', $userId);
+        })
+        ->where('user_id', '!=', $userId)
+        ->where('is_read', false)
+        ->count();
+    }
+
    
     public $timestamps = false;
 
