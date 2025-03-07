@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Notify;
+use App\Events\SendMessage;
 use App\Models\Car;
 use App\Models\Conversation;
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,6 +46,7 @@ class MessageController extends Controller
             ->orderBy('created_at')
             ->get();
 
+            //broadcast(new SendMessage('GG win'));
         return view('messages.show', compact('conversation', 'messages'));
     }
 
@@ -91,11 +95,14 @@ class MessageController extends Controller
         }
 
         // Create message
-        Message::create([
+        $message = Message::create([
             'conversation_id' => $conversation->id,
             'user_id' => $senderId,
             'body' => $request->message,
         ]);
+        $conversationToEvent = $conversation;
+
+        broadcast(new SendMessage($message, $conversationToEvent));
 
         return redirect()->route('messages.show', $conversation)
             ->with('success', 'Message sent successfully!');
@@ -113,11 +120,22 @@ class MessageController extends Controller
         }
 
         // Create message
-        Message::create([
+        $latestMessage = Message::create([
             'conversation_id' => $conversation->id,
             'user_id' => Auth::id(),
             'body' => $request->message,
         ]);
+
+        $replier = Auth::user()->name;
+
+
+        
+        $message = Message::where('user_id',Auth::id())->where('is_read','0')->get();
+
+        
+        $conversationToEvent = Conversation::where('sender_id',Auth::id())->orWhere('receiver_id',Auth::id())->first();
+        broadcast(new SendMessage($message, $conversationToEvent, $latestMessage, $replier));
+        
 
         return redirect()->route('messages.show', $conversation)
             ->with('success', 'Reply sent successfully!');
