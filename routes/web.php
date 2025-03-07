@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\SendMessage;
 use App\Http\Controllers\Auth\GoogleAuthController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CarModelController;
@@ -110,5 +111,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/messages/{conversation}/reply', [MessageController::class, 'reply'])->name('messages.reply');
 });
 
+
+// Route::get('/test', function () {
+//     broadcast(new SendMessage('Myo Min Thein', 'Hello World'));
+// });
 
 require __DIR__.'/auth.php';
