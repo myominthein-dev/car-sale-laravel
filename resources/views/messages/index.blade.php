@@ -29,7 +29,7 @@
                                         <div class="flex items-center">
                                             <h3 class="font-medium">{{ $otherUser->name }}</h3>
                                             @if($unreadCount > 0)
-                                                <span class="ml-2 bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
+                                                <span id="unread-conversation" class="ml-2 bg-blue-600 text-white text-xs px-2 py-1 rounded-full">
                                                     {{ $unreadCount }}
                                                 </span>
                                             @endif
@@ -57,5 +57,29 @@
     </div>
 </div>
    @endsection
+
+  @push('scripts')
+  <script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+        const unreadCount = document.getElementById('unread-count')
+        const conversationUnread = document.getElementById('unread-conversation')
+        Echo.private('message').listen('SendMessage', (e) => {
+            console.log(e)
+            let c = 0
+            e.message?.forEach(m => {
+                c += 1
+            });
+           
+            if (conversationUnread) {
+                conversationUnread.classList.remove('hidden')
+
+                conversationUnread.classList.add('!block')
+                conversationUnread.innerText = c
+            }
+            unreadCount.innerText = c
+        })
+    })
+</script>
+  @endpush
 </x-app-layout>
 
