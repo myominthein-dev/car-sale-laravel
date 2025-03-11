@@ -17,10 +17,10 @@
                 </ul>
             </div>
             <div>
-                <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
-                <p>123 Car Street, Automotive City, AC 12345</p>
-                <p>Email: info@carfindal.com</p>
-                <p>Phone: (123) 456-7890</p>
+                <h3 class="text-lg font-semibold mb-4">Developer Contact</h3>
+                
+                <p>Email: myomin9916@gmail.com</p>
+                <p>Phone: 09 451 819 025</p>
             </div>
         </div>
         <hr class="my-6 border-gray-700">

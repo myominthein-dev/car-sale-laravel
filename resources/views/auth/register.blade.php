@@ -26,12 +26,12 @@
                     <button type="submit" class="w-full bg-blue-600 text-white rounded-lg px-4 py-3 font-semibold hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition duration-200">Register</button>
                 </form>
 
-                <div class="mt-4 text-gray-600 gap-4">
-                    <button class="flex items-center w-full justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200">
+                <div class="mt-4 text-gray-600  gap-4">
+                    <a href="{{ route('auth.google.redirect') }}" class="flex w-full items-center justify-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition duration-200">
                         <img src="{{ asset('img/google.png') }}" alt="Google" class="w-5 h-5">
                         <span>Google</span>
-                    </button>
-                   
+                    </a>
+                    
                 </div>
 
                 <p class="text-center mt-4 text-gray-600">
