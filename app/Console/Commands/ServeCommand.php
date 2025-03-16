@@ -23,6 +23,6 @@ class ServeCommand extends BaseServeCommand
      */
     protected function port()
     {
-        return $this->input->getOption('port') ?? env('PORT', 8000);
+        return $this->input->getOption('port') ?? env('PORT', 8984);
     }
 }
