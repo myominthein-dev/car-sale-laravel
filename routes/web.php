@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
     Route::resource('cars',CarController::class);
     Route::get('/car/search',[CarController::class,'search'])->name('cars.search');
     Route::get('/car/add-to-wishList/{car}',[CarController::class,'addToWishList'])->name('cars.addToWishList');
@@ -82,12 +83,7 @@ Route::get('/unauthorized', function () {
 })->name('unauthorized');
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::put('/profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+
 
 Route::get('auth/google/redirect', [GoogleAuthController::class, 'redirectToGoogle'])->name('auth.google.redirect');
 Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback'])->name('auth.google.callback');
