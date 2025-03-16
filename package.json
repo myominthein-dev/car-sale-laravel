@@ -20,5 +20,8 @@
     },
     "dependencies": {
         "tailwindcss-animate": "^1.0.7"
-    }
+    },
+    "engines": {
+  "node": ">=20"
+}
 }
