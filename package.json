@@ -3,7 +3,9 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "start": "php artisan serve --host=0.0.0.0 --port=$PORT"
+
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
