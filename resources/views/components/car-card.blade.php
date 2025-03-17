@@ -2,7 +2,7 @@
     <a href="{{ route('home.show', $car) }}">
         <img src="{{ asset('storage/car_images/'.$car->primaryImage?->image_path) }}" alt="{{ $car->title }}" class="w-full h-48 object-cover">
     </a>
-    <div class="p-4">
+    <div class="p-4 ">
         <div class="flex items-center justify-between mb-2">
             {{-- <small class="text-gray-500">{{ $car->city->name }}</small> --}}
             <div>
@@ -34,7 +34,7 @@
 
         
         <hr class="my-2">
-        <div class="flex justify-between items-center text-sm">
+        <div class="flex justify-between items-center mt-auto text-sm">
             <div >
                 Owner : <span class="font-semibold"> {{ $car->user->name }}</span>
             </div>

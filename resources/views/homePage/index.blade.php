@@ -35,7 +35,7 @@
         }
 
         Echo.private('message').listen('SendMessage', (e) => {
-            console.log(e)
+            
             let c = 0
 
             if (e.message.length > 1) {
@@ -48,6 +48,7 @@
             }
 
             if (unreadCount.getAttribute('data-id') == e.conversation?.receiver_id || unreadCount.getAttribute('data-id') == e.conversation?.sender_id ) {
+                console.log('gg')
                     unreadCount.classList.remove('hidden');
                     unreadCount.classList.add('!block')
                     unreadCount.innerText = c
