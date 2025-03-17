@@ -5,7 +5,7 @@
             <div>
                 <h3 class="text-lg font-semibold mb-4">About Us</h3>
                 <p>
-                    Car Findal is a platform where you can find the best cars for sale. We have a wide range of cars available for sale. You can also sell your car on our platform.
+                   Register an account then create cars and connect to other registered users with realtime messaging system.
                 </p>
             </div>
             <div>

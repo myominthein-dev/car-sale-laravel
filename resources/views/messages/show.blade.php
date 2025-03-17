@@ -25,7 +25,7 @@
                             </div>
                         </div>
 
-                        <div id="sms-container" class="space-y-4 overflow-y-hidden min-h-[1000px] mb-6">
+                        <div id="sms-container" data-id="{{ Auth::id() }}" class="space-y-4  mb-6">
                             @foreach ($messages as $message)
                                 <div class="flex {{ $message->user_id === Auth::id() ? 'justify-end' : 'justify-start' }}">
                                     <div
@@ -65,12 +65,12 @@
     @push('scripts')
         <script type="module">
             document.addEventListener('DOMContentLoaded', () => {
-                const smsContainer = document.getElementById('sms-container');
+                const smsContainer = document.querySelector('#sms-container');
 
                 Echo.private('message').listen('SendMessage', (e) => {
                     if (!e.latestMessage) return;
 
-                    console.log(e.latestMessage)
+                    
                     // Convert Laravel timestamp to JavaScript Date
                     const createdAt = new Date(e.latestMessage.created_at);
                     const formattedDate = createdAt.toLocaleString('en-US', {
@@ -98,8 +98,10 @@
             </div>`;
 
                     // Append the new message to the container
+
+                    if (smsContainer.getAttribute('data-id') != e.latestMessage.user_id) {
                     smsContainer.insertAdjacentHTML('beforeend', template);
-                   
+                    }
                 });
             });
         </script>
