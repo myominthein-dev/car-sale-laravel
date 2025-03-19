@@ -68,6 +68,7 @@
                 const smsContainer = document.querySelector('#sms-container');
 
                 Echo.private('message').listen('SendMessage', (e) => {
+                    console.log(e)
                     if (!e.latestMessage) return;
 
                     
@@ -100,6 +101,7 @@
                     // Append the new message to the container
 
                     if (smsContainer.getAttribute('data-id') != e.latestMessage.user_id) {
+                        console.log('work')
                     smsContainer.insertAdjacentHTML('beforeend', template);
                     }
                 });

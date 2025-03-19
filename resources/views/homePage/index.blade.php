@@ -35,7 +35,7 @@
         }
 
         Echo.private('message').listen('SendMessage', (e) => {
-            
+            console.log(e)
             let c = 0
 
             if (e.message.length > 1) {
