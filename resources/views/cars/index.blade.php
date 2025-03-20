@@ -26,7 +26,7 @@
                 <tr class="border-b border-gray-200 hover:bg-gray-50">
                     <td class="p-3 border border-gray-300">{{ $index + 1 }}</td>
                     <td class="p-3 border border-gray-300">
-                        <img src="{{ asset('/storage/car_images/'. $car->primaryImage->image_path) }}" alt="Car Image" class="w-16 h-16 rounded-md object-cover">
+                        <img src="{{ asset('/storage/car_images/'. $car->primaryImage?->image_path) }}" alt="Car Image" class="w-16 h-16 rounded-md object-cover">
                     </td>
                     <td class="p-3 border border-gray-300">{{ $car->maker->name }}</td>
                     <td class="p-3 border border-gray-300">{{ $car->carModel->name }}</td>
