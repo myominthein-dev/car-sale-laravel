@@ -32,30 +32,52 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $makers = [
-            "Toyota" => ["Corolla", "Camry", "RAV4", "Highlander", "Prius"],
-            "Ford" => ["F-150", "Mustang", "Explorer", "Escape", "Edge"],
-            "Honda" => ["Civic", "Accord", "CR-V", "Pilot", "Fit"],
-            "Chevrolet" => ["Silverado", "Malibu", "Equinox", "Tahoe", "Camaro"],
-            "Nissan" => ["Altima", "Rogue", "Sentra", "Pathfinder", "Versa"],
-            "Lexus" => ["RX", "ES", "NX", "GX", "LS"]
+            "Toyota" => ["Corolla", "Camry", "RAV4", "Highlander", "Prius", "Land Cruiser", "Tacoma"],
+            "Ford" => ["F-150", "Mustang", "Explorer", "Escape", "Edge", "Bronco", "Fusion"],
+            "Honda" => ["Civic", "Accord", "CR-V", "Pilot", "Fit", "HR-V", "Odyssey"],
+            "Chevrolet" => ["Silverado", "Malibu", "Equinox", "Tahoe", "Camaro", "Suburban", "Traverse"],
+            "Nissan" => ["Altima", "Rogue", "Sentra", "Pathfinder", "Versa", "Frontier", "Maxima"],
+            "Lexus" => ["RX", "ES", "NX", "GX", "LS", "LX", "UX"],
+            "BMW" => ["3 Series", "5 Series", "X3", "X5", "7 Series", "M3", "i4"],
+            "Mercedes-Benz" => ["C-Class", "E-Class", "S-Class", "GLC", "GLE", "G-Wagon", "A-Class"],
+            "Audi" => ["A4", "A6", "Q5", "Q7", "A8", "R8", "e-tron"],
+            "Hyundai" => ["Elantra", "Sonata", "Tucson", "Santa Fe", "Kona", "Palisade", "Venue"],
+            "Kia" => ["Forte", "Optima", "Sportage", "Sorento", "Telluride", "Seltos", "Stinger"],
+            "Volkswagen" => ["Golf", "Jetta", "Passat", "Tiguan", "Atlas", "Beetle", "ID.4"],
+            "Subaru" => ["Impreza", "Outback", "Forester", "Crosstrek", "Legacy", "Ascent", "WRX"],
+            "Mazda" => ["Mazda3", "Mazda6", "CX-5", "CX-9", "MX-5 Miata", "CX-30", "CX-90"],
+            "Tesla" => ["Model 3", "Model S", "Model X", "Model Y", "Cybertruck", "Roadster", "Semi"],
+            "Jeep" => ["Wrangler", "Grand Cherokee", "Cherokee", "Renegade", "Compass", "Gladiator", "Wagoneer"],
+            "Dodge" => ["Charger", "Challenger", "Durango", "Journey", "Ram 1500", "Dart", "Viper"],
+            "GMC" => ["Sierra", "Yukon", "Acadia", "Terrain", "Canyon", "Hummer EV", "Envoy"],
+            "Porsche" => ["911", "Cayenne", "Macan", "Panamera", "Taycan", "718 Boxster", "718 Cayman"],
+            "Jaguar" => ["XE", "XF", "F-Type", "E-Pace", "F-Pace", "I-Pace", "XJ"],
+            "Land Rover" => ["Range Rover", "Defender", "Discovery", "Velar", "Evoque", "Freelander", "Sport"]
         ];
+        
 
         foreach ($makers as $maker => $models) {
             Maker::factory()->state(['name' => $maker])->has(CarModel::factory()->count(count($models))->sequence(...array_map(fn ($model) => ['name' => $model],$models)))->create();
         }
 
         $states = [
-            "California" => ["Los Angeles", "San Francisco", "San Diego", "Sacramento", "San Jose"],
-            "Texas" => ["Houston", "Dallas", "Austin", "San Antonio", "Fort Worth"],
-            "Florida" => ["Miami", "Orlando", "Tampa", "Jacksonville", "Tallahassee"],
-            "New York" => ["New York City", "Buffalo", "Rochester", "Albany", "Syracuse"],
-            "Illinois" => ["Chicago", "Aurora", "Naperville", "Springfield", "Peoria"],
-            "Pennsylvania" => ["Philadelphia", "Pittsburgh", "Harrisburg", "Allentown", "Erie"],
-            "Ohio" => ["Columbus", "Cleveland", "Cincinnati", "Toledo", "Akron"],
-            "Georgia" => ["Atlanta", "Savannah", "Augusta", "Columbus", "Macon"],
-            "North Carolina" => ["Charlotte", "Raleigh", "Durham", "Greensboro", "Winston-Salem"],
-            "Michigan" => ["Detroit", "Grand Rapids", "Ann Arbor", "Lansing", "Flint"]
+            "Yangon" => ["Yangon", "Thanlyin", "Hmawbi", "Twante", "Kyauktan"],
+            "Mandalay" => ["Mandalay", "Pyin Oo Lwin", "Meiktila", "Kyaukse", "Amarapura"],
+            "Ayeyarwady" => ["Pathein", "Hinthada", "Myaungmya", "Bogale", "Pyapon"],
+            "Bago" => ["Bago", "Taungoo", "Pyay", "Nyaunglebin", "Tharrawaddy"],
+            "Magway" => ["Magway", "Pakokku", "Minbu", "Yenangyaung", "Chauk"],
+            "Sagaing" => ["Sagaing", "Monywa", "Shwebo", "Kale", "Tamu"],
+            "Tanintharyi" => ["Dawei", "Myeik", "Kawthaung", "Palaw", "Tanintharyi"],
+            "Kayin" => ["Hpa-An", "Myawaddy", "Kawkareik", "Thandaunggyi", "Hlaingbwe"],
+            "Mon" => ["Mawlamyine", "Thaton", "Ye", "Paung", "Chaungzon"],
+            "Rakhine" => ["Sittwe", "Thandwe", "Mrauk U", "Kyaukphyu", "Toungup"],
+            "Shan" => ["Taunggyi", "Lashio", "Kengtung", "Muse", "Hsipaw"],
+            "Kachin" => ["Myitkyina", "Bhamo", "Putao", "Mohnyin", "Waingmaw"],
+            "Chin" => ["Hakha", "Falam", "Tedim", "Mindat", "Kanpetlet"],
+            "Kayah" => ["Loikaw", "Demoso", "Hpruso", "Shadaw", "Bawlakhe"],
+            "Naypyidaw" => ["Zabuthiri", "Ottarathiri", "Pobbathiri", "Dekkhinathiri", "Tatkon"]
         ];
+        
 
         foreach($states as $state => $cities) {
             State::factory()

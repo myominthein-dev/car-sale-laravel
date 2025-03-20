@@ -5,7 +5,7 @@
             <div>
                 <h3 class="text-lg font-semibold mb-4">About Us</h3>
                 <p>
-                   Register an account then create cars and connect to other registered users with realtime messaging system.
+                   Register an account then create cars and connect to other registered users with  messaging system.
                 </p>
             </div>
             <div>
