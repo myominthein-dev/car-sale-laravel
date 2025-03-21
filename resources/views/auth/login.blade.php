@@ -9,12 +9,32 @@
                 </div>
                 <h1 class="text-3xl font-bold text-center text-gray-700 mb-8">Login</h1>
 
+                 <!-- Display validation errors -->
+                 @if ($errors->any())
+                 <div class="bg-red-50 text-red-500 p-3 rounded-lg mb-4">
+                     <ul class="list-disc pl-5">
+                         @foreach ($errors->all() as $error)
+                             <li>{{ $error }}</li>
+                         @endforeach
+                     </ul>
+                 </div>
+             @endif
+
                 <form action="{{ route('login') }}" method="POST" class="space-y-4">
                     @csrf
                     <div class="space-y-4">
-                        <input type="email" name="email" placeholder="Your Email" class="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 transition duration-200" required>
-                        <input type="password" name="password" placeholder="Your Password" class="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 transition duration-200" required>
-                        
+                        <div>
+                            <input type="email" name="email" placeholder="Your Email" class="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 transition duration-200 @error('email') border-red-500 @enderror"  required>
+                        @error('email')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                        </div>
+                        <div>
+                            <input type="password" name="password" placeholder="Your Password" class="w-full px-4 py-3 rounded-lg bg-gray-100 border-gray-300 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-200 transition duration-200 @error('password') border-red-500 @enderror" required>
+                        @error('password')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                        </div>
                     </div>
                     
                    
