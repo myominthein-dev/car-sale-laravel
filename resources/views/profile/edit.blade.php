@@ -17,7 +17,7 @@
                         
                         <form method="POST" action="{{ route('profile.update') }}">
                             @csrf
-                            @method('PUT')
+                            @method('PATCH')
                             
                             <div class="mb-4">
                                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
